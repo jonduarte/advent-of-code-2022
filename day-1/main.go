@@ -14,7 +14,7 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Printf("Max: %d", max(count(split(string(f)))))
+	fmt.Printf("Max: %d", max(count(split(string(f))), 3))
 }
 
 func split(t string) [][]string {
@@ -47,12 +47,18 @@ func count(c [][]string) []int {
 	return res
 }
 
-func max(c []int) int {
-	sort.Ints(c)
+func max(c []int, top int) int {
+	sort.Slice(c, func(a, b int) bool {
+		return c[b] < c[a]
+	})
 
-	if len(c) > 0 {
-		return c[len(c)-1]
-	} else {
-		return 0
+	t := 0
+	for i, v := range c {
+		if i >= top {
+			break
+		}
+		t += v
 	}
+
+	return t
 }

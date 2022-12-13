@@ -78,18 +78,22 @@ func Test_max(t *testing.T) {
 	tt := map[string]struct {
 		input []int
 		want  int
+		top   int
 	}{
 		"simple": {
-			[]int{10, 30, 40, 20}, 40,
+			[]int{10, 30, 40, 20}, 40, 1,
+		},
+		"top 2": {
+			[]int{10, 30, 40, 20}, 70, 2,
 		},
 		"edge case": {
-			[]int{}, 0,
+			[]int{}, 0, 1,
 		},
 	}
 
 	for name, tc := range tt {
 		t.Run(name, func(t *testing.T) {
-			got := max(tc.input)
+			got := max(tc.input, tc.top)
 			if got != tc.want {
 				t.Fatalf("%s: expected, %v, got %v", name, tc.want, got)
 			}
