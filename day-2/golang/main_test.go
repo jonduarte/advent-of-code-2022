@@ -51,14 +51,13 @@ func Test_score(t *testing.T) {
 		input string
 		want  int
 	}{
-		"won":  {"A Y", 8},
-		"lost": {"B X", 1},
-		"draw": {"C Z", 6},
+		"loose": {"B X", 1},
+		"draw":  {"A Y", 4},
+		"win":   {"C Z", 7},
 	}
 
 	for name, tc := range tt {
-
-		t.Run("%s x %s = %d", func(t *testing.T) {
+		t.Run(name, func(t *testing.T) {
 			got := score(tc.input)
 			if got != tc.want {
 				t.Fatalf("%s: expected %v, got %v", name, tc.want, got)

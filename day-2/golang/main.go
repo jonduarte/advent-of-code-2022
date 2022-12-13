@@ -12,10 +12,10 @@ var Opponent = map[string]string{
 	"C": "Scissors",
 }
 
-var Myself = map[string]string{
-	"X": "Rock",
-	"Y": "Paper",
-	"Z": "Scissors",
+var Action = map[string]string{
+	"X": "loose",
+	"Y": "draw",
+	"Z": "win",
 }
 
 var BattleScore = map[int]int{
@@ -50,11 +50,32 @@ func main() {
 func score(input string) int {
 	split := strings.Split(input, " ")
 	opponent := Opponent[split[0]]
-	myself := Myself[split[1]]
+
+	action := Action[split[1]]
+	var myself string
+
+	switch action {
+	case "win":
+		myself = opposite(opponent)
+	case "draw":
+		myself = opponent
+	case "loose":
+		myself = opposite(opposite(opponent))
+	}
 
 	res := battle(opponent, myself)
-
 	return BattleScore[res] + ItemScore[myself]
+}
+
+func opposite(s string) string {
+	switch s {
+	case "Rock":
+		return "Paper"
+	case "Paper":
+		return "Scissors"
+	default:
+		return "Rock"
+	}
 }
 
 func battle(opponent, myself string) int {
