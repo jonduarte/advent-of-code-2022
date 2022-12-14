@@ -1,0 +1,4 @@
+(executable
+ (public_name day)
+ (name main)
+ (libraries day core core_unix str))
