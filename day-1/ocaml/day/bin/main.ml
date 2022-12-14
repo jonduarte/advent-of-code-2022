@@ -1,6 +1,5 @@
 open Core
 let content = In_channel.read_all "input-2"
-
 let split_groups = Str.split (Str.regexp "\n\n")
 let split_lines = Str.split (Str.regexp "\n")
 let list_of_ints = List.map ~f:int_of_string
@@ -18,8 +17,3 @@ let () =
     |> sum
 in
   print_endline (string_of_int result)
-
-
-
-
-
