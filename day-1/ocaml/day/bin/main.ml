@@ -11,8 +11,7 @@ let () =
   let result = content
     |> split_groups
     |> List.map ~f:total_calories
-    |> List.sort ~compare:Int.compare
-    |> List.rev
+    |> List.sort ~compare:Int.descending
     |> Fn.flip (List.take) 3
     |> sum
 in
